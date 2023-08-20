@@ -1,0 +1,37 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model customer {
+  id           Int            @id @default(autoincrement())
+  name         String?
+  password     String?
+  email        String?
+  productorder productorder[]
+}
+
+model product {
+  id               Int            @id @default(autoincrement())
+  name             String?
+  description      String?
+  instock_quantity Int
+  price            Decimal
+  productorder     productorder[]
+}
+
+model productorder {
+  order_id         Int      @id @default(autoincrement())
+  product          product  @relation(fields: [product_id], references: [id])
+  product_id       Int
+  customer         customer @relation(fields: [customer_id], references: [id])
+  customer_id      Int
+  product_quantity Int
+}
