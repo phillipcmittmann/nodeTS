@@ -40,26 +40,98 @@ var client_1 = require("@prisma/client");
 var prisma = new client_1.PrismaClient();
 function main() {
     return __awaiter(this, void 0, void 0, function () {
-        var customer, customers;
+        var productorder, customer;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, prisma.customer.deleteMany()];
                 case 1:
                     _a.sent();
+                    return [4 /*yield*/, prisma.product.deleteMany()];
+                case 2:
+                    _a.sent();
+                    return [4 /*yield*/, prisma.productorder.deleteMany()];
+                case 3:
+                    _a.sent();
+                    // const customer = await prisma.customer.create({
+                    //     data: {
+                    //         name: "Phillip",
+                    //         password: "huehuebrbr",
+                    //         email: "huehuebrbr@gmail.com"
+                    //     }
+                    // });
+                    // const customerId = await prisma.customer.findMany({
+                    //     where: {
+                    //         name: "Phillip"
+                    //     }
+                    // });
+                    // const product = await prisma.product.create({
+                    //     data: {
+                    //         name: "Produto",
+                    //         description: "Descricao",
+                    //         instock_quantity: 10,
+                    //         price: 1.0
+                    //     }
+                    // });
+                    // const productId = await prisma.product.findMany({
+                    //     where: {
+                    //         name: "Produto"
+                    //     }
+                    // });
                     return [4 /*yield*/, prisma.customer.create({
                             data: {
                                 name: "Phillip",
                                 password: "huehuebrbr",
-                                email: "huehuebrbr@gmail.com"
+                                email: "huehuebrbr@gmail.com",
+                                productorder: {
+                                    create: {
+                                        product: {
+                                            create: {
+                                                name: "Produto",
+                                                description: "Descricao",
+                                                instock_quantity: 10,
+                                                price: 1.0
+                                            }
+                                        },
+                                        product_quantity: 10
+                                    }
+                                }
                             }
                         })];
-                case 2:
+                case 4:
+                    // const customer = await prisma.customer.create({
+                    //     data: {
+                    //         name: "Phillip",
+                    //         password: "huehuebrbr",
+                    //         email: "huehuebrbr@gmail.com"
+                    //     }
+                    // });
+                    // const customerId = await prisma.customer.findMany({
+                    //     where: {
+                    //         name: "Phillip"
+                    //     }
+                    // });
+                    // const product = await prisma.product.create({
+                    //     data: {
+                    //         name: "Produto",
+                    //         description: "Descricao",
+                    //         instock_quantity: 10,
+                    //         price: 1.0
+                    //     }
+                    // });
+                    // const productId = await prisma.product.findMany({
+                    //     where: {
+                    //         name: "Produto"
+                    //     }
+                    // });
+                    _a.sent();
+                    return [4 /*yield*/, prisma.productorder.findFirst()];
+                case 5:
+                    productorder = _a.sent();
+                    return [4 /*yield*/, prisma.customer.findFirst()];
+                case 6:
                     customer = _a.sent();
+                    console.log(productorder);
                     console.log(customer);
-                    return [4 /*yield*/, prisma.customer.findMany()];
-                case 3:
-                    customers = _a.sent();
-                    console.log(customers);
                     return [2 /*return*/];
             }
         });
